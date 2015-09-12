@@ -2,6 +2,31 @@
 
 var _ = require ('lodash');
 
+var _some = function (arr, fun) {
+  var lastErr, lastCall;
+
+  var length = arr.length;
+  for (var i = 0; i < length; i++) {
+    try {
+      lastCall = fun (arr[i]);
+      if (lastCall) return lastCall;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+
+  throw lastErr;
+};
+
+var _every = function (arr, fun) {
+  var length = arr.length;
+  for (var i = 0; i < length; i++) {
+    fun (arr[i]);
+  }
+
+  return true;
+};
+
 var Craftsman = function () {
   this._pattern = null;
   this._rules = {};
@@ -25,11 +50,9 @@ Craftsman.prototype.satisfies = function (data) {
     return _.every (rules, function (val, key) {
       switch (key) {
         case '$or':
-        return _.some (val, satisfies);
+        return _some (val, satisfies);
         case '$and':
-        return _.every (val, satisfies);
-        case '$not':
-        return !satisfies (val);
+        return _every (val, satisfies);
         default:
         return that._rules[key].call (that, data, val);
       };
