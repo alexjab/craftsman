@@ -2,13 +2,21 @@
 
 var _ = require ('lodash');
 
-var _some = function (arr, fun) {
+var Craftsman = function () {
+  this._pattern = null;
+  this._rules = {};
+
+  return this;
+};
+
+// A `some` implementation with `throw new Error` instead of `return false`;
+var _some = Craftsman._some = function (arr, fun) {
   var lastErr, lastCall;
 
   var length = arr.length;
   for (var i = 0; i < length; i++) {
     try {
-      lastCall = fun (arr[i]);
+      lastCall = fun.call (this, arr[i], i);
       if (lastCall) return lastCall;
     } catch (e) {
       lastErr = e;
@@ -18,20 +26,13 @@ var _some = function (arr, fun) {
   throw lastErr;
 };
 
-var _every = function (arr, fun) {
+var _every = Craftsman._every = function (arr, fun) {
   var length = arr.length;
   for (var i = 0; i < length; i++) {
-    fun (arr[i]);
+    fun.call (this, arr[i], i);
   }
 
   return true;
-};
-
-var Craftsman = function () {
-  this._pattern = null;
-  this._rules = {};
-
-  return this;
 };
 
 Craftsman.prototype.pattern = function (pattern) {
@@ -50,12 +51,12 @@ Craftsman.prototype.satisfies = function (data) {
     return _.every (rules, function (val, key) {
       switch (key) {
         case '$or':
-        return _some (val, satisfies);
+        return _some.call (that, val, satisfies);
         case '$and':
-        return _every (val, satisfies);
+        return _every.call (that, val, satisfies);
         default:
         return that._rules[key].call (that, data, val);
-      };
+      }
     });
   };
 
