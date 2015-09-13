@@ -1,10 +1,10 @@
 {
   "name": "craftsman",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A javascript specification pattern engine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "author": "alexjab <alexandre.jablon@gmail.com> (http://jablon.me/)",
   "license": "MIT",
