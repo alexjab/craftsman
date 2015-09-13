@@ -45,22 +45,22 @@ Craftsman.prototype.rule = function (ruleKey, validator) {
   return this;
 };
 
-Craftsman.prototype.satisfies = function (data) {
+Craftsman.prototype.isSatisfiedBy = function (data) {
   var that = this;
-  var satisfies = function (rules) {
+  var satisfied = function (rules) {
     return _.every (rules, function (val, key) {
       switch (key) {
         case '$or':
-        return _some.call (that, val, satisfies);
+        return _some.call (that, val, satisfied);
         case '$and':
-        return _every.call (that, val, satisfies);
+        return _every.call (that, val, satisfied);
         default:
         return that._rules[key].call (that, data, val);
       }
     });
   };
 
-  return satisfies (this._pattern);
+  return satisfied (this._pattern);
 };
 
 module.exports = Craftsman;

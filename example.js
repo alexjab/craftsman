@@ -52,7 +52,7 @@ spec.rule ('nb_items', function (data, rule) {
 
 var err;
 try {
-  spec.satisfies ({
+  spec.isSatisfiedBy ({
     'buyDate': new Date (2014, 1, 15),
     'priceOfThingy': 15,
     'itemsInBox': 10

@@ -95,7 +95,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
     });
   });
 
-  describe ('#satisfies', function () {
+  describe ('#isSatisfiedBy', function () {
     describe ('$or case', function () {
       it ('should call only one rule method (no exception)', function () {
         var spec = new craftsman ();
@@ -118,7 +118,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
           return true;
         });
 
-        spec.satisfies ({});
+        spec.isSatisfiedBy ({});
 
         fooCalled.should.be.true ();
         barCalled.should.be.false ();
@@ -146,7 +146,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
           return true;
         });
 
-        spec.satisfies ({});
+        spec.isSatisfiedBy ({});
 
         fooCalled.should.be.true ();
         barCalled.should.be.true ();
@@ -176,7 +176,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
 
         var err;
         try {
-          spec.satisfies ({});
+          spec.isSatisfiedBy ({});
         } catch (e) {
           err = e;
         }
@@ -212,7 +212,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
           return true;
         });
 
-        spec.satisfies ({});
+        spec.isSatisfiedBy ({});
 
         fooCalled.should.be.true ();
         barCalled.should.be.true ();
@@ -242,7 +242,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
 
         var err;
         try {
-          spec.satisfies ({});
+          spec.isSatisfiedBy ({});
         } catch (e) {
           err = e;
         }
@@ -271,7 +271,7 @@ describe ('craftsman - A javascript specification pattern engine', function () {
           return true;
         });
 
-        spec.satisfies ({});
+        spec.isSatisfiedBy ({});
 
         fooCalled.should.be.true ();
       });
