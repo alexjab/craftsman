@@ -1,14 +1,17 @@
 {
   "name": "craftsman",
-  "version": "0.1.0",
-  "description": "A specification pattern engine",
+  "version": "0.1.1",
+  "description": "A javascript specification pattern engine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "author": "alexjab <alexandre.jablon@gmail.com> (http://jablon.me/)",
   "license": "MIT",
   "dependencies": {
     "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "should": "^7.1.0"
   }
 }
